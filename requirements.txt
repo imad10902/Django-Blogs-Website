@@ -6,3 +6,5 @@ tzdata==2023.3
 psycopg2-binary
 dj-database-url
 gunicorn
+whitenoise
+Brotli
