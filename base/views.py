@@ -10,7 +10,7 @@ def home(request):
 
 
 def blogsPage(request):
-    q = request.GET.get("q") if request.GET.get("q") != None else ""
+    q = request.GET.get("q") if request.GET.get("q") != None else "" #receiving query of categories
 
     if q == "":
         blogs = Blog.objects.all()
@@ -46,10 +46,10 @@ def blogDetail(request, pk):
 
 def editBlog(request, pk):
     blog = Blog.objects.get(id=pk)
-    form = BlogForm(instance=blog)
+    form = BlogForm(instance=blog) #form already has data while editing
 
     if request.method == "POST":
-        form = BlogForm(request.POST, instance=blog)
+        form = BlogForm(request.POST, instance=blog) #form updates without creating new form
         if form.is_valid():
             form.save()
             return redirect("blogs")
@@ -76,7 +76,7 @@ def myBlogsPage(request):
         blogs = Blog.objects.filter(author=request.user)
         page = 'myblogs'
     else:
-        blogs = Blog.objects.filter(draft='YES', author=request.user)
+        blogs = Blog.objects.filter(draft='YES', author=request.user) #drafts are fetched
         page = 'drafts'
 
     context = {"blogs": blogs, 'page': page}
